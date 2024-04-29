@@ -17,7 +17,7 @@ var result = [];
 for (var i = 0; i < xArray.length; i++) {
   result.push(xArray[i] * yArray[i]);
 }
-let one = result.reduce((acc, ele) => {return acc + ele}, 0) 
+let one = result.reduce((acc, ele) => {return acc + ele}, 0) * ((xArray.length)*(xArray.reduce((acc, ele) => {return acc + ele}, 0) / xArray.length)*(yArray.reduce((acc, ele) => {return acc + ele}, 0) / yArray.length)
   console.log("sumXY array: "+result)
   console.log("sumXY: "+ one)
   
