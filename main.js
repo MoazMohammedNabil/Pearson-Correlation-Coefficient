@@ -41,6 +41,7 @@ console.log("y² * (y² / n): "+four)
 console.log("✓y² * (y² / n): "+Math.sqrt(four))
 
 document.querySelector('.solution').style.display = 'block'
+  console.log('Pearson-Correlation-Coefficient: '+(one * two) / (Math.sqrt(three) * Math.sqrt(four)))
   return (one * two) / (Math.sqrt(three) * Math.sqrt(four))
   
 }
