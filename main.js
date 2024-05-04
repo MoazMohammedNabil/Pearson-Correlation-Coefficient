@@ -11,37 +11,45 @@ function func() {
 function Pearson_correlation_coefficient(x,y) {
   let xArray = x.split(',').map(Number);
   let yArray = y.split(',').map(Number);
+  console.log('xArray: '+xArray)
+  console.log('yArray: '+yArray)
+  console.log('n: '+xArray.length)
   
+  let n = xArray.length
+let xbar = xArray.reduce((acc, ele) => {return acc + ele}, 0) / xArray.length
+let ybar = yArray.reduce((acc, ele) => {return acc + ele}, 0) / yArray.length
+console.log("xbar: "+xbar)
+console.log('ybar: '+ybar)
 
 var result = [];
 for (var i = 0; i < xArray.length; i++) {
   result.push(xArray[i] * yArray[i]);
 }
-let one = result.reduce((acc, ele) => {return acc + ele}, 0) * ((xArray.length)*(xArray.reduce((acc, ele) => {return acc + ele}, 0) / xArray.length)*(yArray.reduce((acc, ele) => {return acc + ele}, 0) / yArray.length)
-  console.log("sumXY array: "+result)
-  console.log("sumXY: "+ one)
+let XY = result.reduce((acc, ele) => {return acc + ele}, 0)
+  console.log("XY array: "+result)
+  console.log("sumXY: "+ XY)
   
+  let top = XY - n * xbar * ybar
+  console.log("sumXY - n (xbar) (ybar): "+top)
   
-let two =  xArray.reduce((acc, ele) => {return acc + ele}, 0) * yArray.reduce((acc, ele) => {return acc + ele}, 0) / xArray.length
-console.log("sumX * sumY: " + two * xArray.length)
-console.log("sumX * sumY / n: " + two)
+  let sumxtwo = xArray.reduce((acc, ele) => {return acc + ele ** 2}, 0)
+  console.log('sumX²: '+sumxtwo)
+  let sumytwo = yArray.reduce((acc, ele) => {return acc + ele ** 2}, 0)
+  console.log('sumy²: '+sumytwo)
+  let xbar_two = xbar ** 2
+  console.log('xbar²: '+xbar_two)
+  let ybar_two = ybar ** 2
+  console.log('ybar²: '+ybar_two)
+  
+  let bottom = Math.sqrt(sumxtwo - n * xbar_two) * Math.sqrt(sumytwo - n * ybar_two)
+  
+
 
   
-let three = xArray.reduce((acc, ele) => {return acc + ele ** 2}, 0) * (xArray.reduce((acc, ele) => {return acc + ele ** 2}, 0) / xArray.length)
-console.log("x²: "+xArray.reduce((acc, ele) => {return acc + ele ** 2}, 0))
-console.log("x² / n: "+(xArray.reduce((acc, ele) => {return acc + ele ** 2}, 0) / xArray.length))
-console.log("x² * (x² / n): "+three)
-console.log("✓x² * (x² / n): "+Math.sqrt(three))
-
-  
-let four = yArray.reduce((acc, ele) => {return acc + ele ** 2}, 0) * yArray.reduce((acc, ele) => {return acc + ele ** 2}, 0) / xArray.length
-console.log("y²: "+yArray.reduce((acc, ele) => {return acc + ele ** 2}, 0))
-console.log("y² / n: "+(yArray.reduce((acc, ele) => {return acc + ele ** 2}, 0) / xArray.length))
-console.log("y² * (y² / n): "+four)
-console.log("✓y² * (y² / n): "+Math.sqrt(four))
 
 document.querySelector('.solution').style.display = 'block'
-  console.log('Pearson-Correlation-Coefficient: '+(one * two) / (Math.sqrt(three) * Math.sqrt(four)))
-  return (one * two) / (Math.sqrt(three) * Math.sqrt(four))
+
+console.log('solution = ',top / bottom)
+  return (top) / (bottom)
   
-}
+                          }
